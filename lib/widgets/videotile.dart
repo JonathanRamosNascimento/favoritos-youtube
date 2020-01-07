@@ -10,7 +10,6 @@ class VideoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final bloc = BlocProvider.getBloc<FavoriteBloc>();
 
     return Container(
