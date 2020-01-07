@@ -8,10 +8,9 @@ class Video {
 
   factory Video.fromJson(Map<String, dynamic> json) {
     return Video(
-      id: json["id"]["videoId"],
-      title: json["snippet"]["title"],
-      thumb: json["snippet"]["thumbnails"]["high"]["url"],
-      channel: json["snippet"]["channelTitle"]
-    );
+        id: json["id"]["videoId"],
+        title: json["snippet"]["title"],
+        thumb: json["snippet"]["thumbnails"]["high"]["url"],
+        channel: json["snippet"]["channelTitle"]);
   }
 }

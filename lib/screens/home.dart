@@ -1,4 +1,6 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertube/blocs/videos_bloc.dart';
 import 'package:fluttertube/delegates/data_search.dart';
 
 class Home extends StatelessWidget {
@@ -19,20 +21,28 @@ class Home extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.star),
-            onPressed: () {
-
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () async{
-              String result = await showSearch(context: context, delegate: DataSearch());
-              print(result);
+            onPressed: () async {
+              String result =
+                  await showSearch(context: context, delegate: DataSearch());
+              if (result != null)
+                BlocProvider.getBloc<VideosBloc>().inSearch.add(result);
             },
           ),
         ],
       ),
-      body: Container(),
+      body: StreamBuilder(
+        stream: BlocProvider.getBloc<VideosBloc>().outVideos,
+        builder: (context, snapshot) {
+          if (snapshot.hasData)
+            return ListView.builder(itemBuilder: null);
+          else
+            return Container();
+        },
+      ),
     );
   }
 }
